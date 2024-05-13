@@ -1,0 +1,14 @@
+.image1{
+    background-image: url('../../assets/image1.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+}
+.image2{
+    background-image: url('../../assets/image2.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+}
