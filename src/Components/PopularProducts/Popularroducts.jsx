@@ -1,22 +1,50 @@
+import { useEffect } from 'react'
 import './PopularProduct.css'
-function Popularroducts(img) {
-    console.log(img)
+import { useState } from 'react'
+function Popularroducts() {
+    const [product, setProduct] = useState([])
+
+    useEffect(() => {
+        (async () => {
+            const res = await fetch('https://dummyjson.com/products')
+            const data = await res.json()
+            setProduct(data.products)
+
+        })()
+    }, [])
+    if(!product){
+        return <p>Data Not Found</p>
+    }
     return (
         <>
-            <div className="card mt-3" >
-                <img src={img.img} className="card-img-top" alt="..." />
-                <div className="card-body">
-                    <p className="card-text">{img.title}</p>
-                    <h6 className="card-title">{img.desc}</h6>
-                    <p className="card-text">
-                        12345678
-                    </p>
-                    <div className="d-flex justify-content-between">
-                        <p>{img.price} <del> {img.del}</del></p>
-                        <a href="#" className="btn btn-primary">
-                            Add
-                        </a>
-                    </div>
+            <div className="container">
+                <div className="row">
+                    {
+                        product.map((data, index) => {
+                            return (
+                                <>
+                                    <div className="col-lg-3 col-md-6 col-sm-12" key={index}>
+                                        <div className="card mt-3" >
+                                            <img src={data.thumbnail} className="card-img-top  " style={{ objectFit: 'cover', height: "250px" }} alt="..." />
+                                            <div className="card-body">
+                                                <h6 className="card-title">{data.title}</h6>
+                                                <p className="card-text">{data.description}</p>
+                                                <p className="card-text">
+                                                    Price: ${data.price}
+                                                </p>
+                                                <div className="d-flex justify-content-between">
+                                                    <a href="#" className="btn btn-primary">
+                                                        Add
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </>
+                            )
+                        })
+                    }
+
                 </div>
             </div>
         </>
