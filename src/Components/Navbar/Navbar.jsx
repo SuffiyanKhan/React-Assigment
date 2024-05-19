@@ -5,7 +5,7 @@ import SearchNavbar from '../SearchNavbar/SearchNavbar'
 import './Navbar.css'
 function Navbar() {
     return (
-        <nav className="navbar navbar-expand-lg py-3 flex-column border-bottom">
+        <nav className="navbar navbar-expand-lg py-3 sticky-top flex-column border-bottom" style={{backgroundColor:"white"}} >
             <div className="container ">
                 <a className="navbar-brand" href="#">
                     <img src={logo} alt="logo" />

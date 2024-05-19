@@ -1,8 +1,10 @@
+import './NavbarNavigation.css'
+
 
 function NavbarNavigation() {
     return (
         <>
-            <div className="container navigation mt-4">
+            <div className="container navigation mt-4  ">
                 <button className="btn bg-color d-flex align-items-center text-light fw-semibold px-3 py-2">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
