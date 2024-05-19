@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import './PopularProduct.css'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 function Popularroducts() {
     const [product, setProduct] = useState([])
 
@@ -12,12 +13,12 @@ function Popularroducts() {
 
         })()
     }, [])
-    if(!product){
+    if (!product) {
         return <p>Data Not Found</p>
     }
     return (
         <>
-            <div className="container">
+            <div className="container mt-5">
                 <div className="row">
                     {
                         product.map((data, index) => {
@@ -32,10 +33,11 @@ function Popularroducts() {
                                                 <p className="card-text">
                                                     Price: ${data.price}
                                                 </p>
-                                                <div className="d-flex justify-content-between">
+                                                <div className="d-flex justify-content-between align-items-center">
                                                     <a href="#" className="btn btn-primary">
                                                         Add
                                                     </a>
+                                                    <Link className='text-dark fw-bold'to={`/d/${data.id}`} >More Detail</Link>
                                                 </div>
                                             </div>
                                         </div>
