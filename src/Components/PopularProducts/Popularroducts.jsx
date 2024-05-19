@@ -2,19 +2,18 @@ import { useEffect } from 'react'
 import './PopularProduct.css'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import Loader from '../Loader/Loader'
 function Popularroducts() {
     const [product, setProduct] = useState([])
-
     useEffect(() => {
         (async () => {
             const res = await fetch('https://dummyjson.com/products')
             const data = await res.json()
             setProduct(data.products)
-
         })()
     }, [])
     if (!product) {
-        return <p>Data Not Found</p>
+        return <Loader/>
     }
     return (
         <>
