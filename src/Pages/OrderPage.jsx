@@ -26,9 +26,9 @@ function OrderPage() {
 
     const handleDelete = (index) => {
         const updatedOrderData = [...orderData];
-        updatedOrderData.splice(index, 1); 
+        updatedOrderData.splice(index, 1);
         setOrderData(updatedOrderData);
-        SetDataToLocalStorage(updatedOrderData); 
+        SetDataToLocalStorage(updatedOrderData);
     };
 
     if (loading) {
@@ -38,7 +38,12 @@ function OrderPage() {
     if (!orderData || orderData.length === 0) {
         return (
             <>
-                <div className="d-flex justify-content-center align-items-center border " style={{ height: "100vh" }}>
+                <div className="container " style={{ height: "80vh" }}>
+                    <div className="mt-5 ms-5">
+                        <BackButton />
+                    </div>
+                    <div className="d-flex justify-content-center align-items-center  h-25">
+                    </div>
                     <DataNotFound />
                 </div>
             </>
@@ -63,7 +68,7 @@ function OrderPage() {
                                 <th>Product Image</th>
                                 <th>Product Title</th>
                                 <th>Product Price</th>
-                                <th>Action</th> 
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -77,7 +82,7 @@ function OrderPage() {
                                     <td>{data.price}</td>
                                     <td>
                                         <button className="btn btn-danger" onClick={() => handleDelete(index)}>Delete</button>
-                                    </td> 
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
