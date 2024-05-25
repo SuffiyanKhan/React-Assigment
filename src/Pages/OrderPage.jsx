@@ -4,8 +4,10 @@ import DataNotFound from "../Components/DataNotFound/DataNotFound";
 import BackButton from "../Components/BackButton/BackButton";
 import TotalPrice from "../Components/TotalPrice/TotalPrice";
 import { SetDataToLocalStorage } from "../Services/SetDataToLocalStorage";
+import { useGlobalState } from "../Context/Context";
 
 function OrderPage() {
+    const { deleteCount, setDeleteCount } = useGlobalState()
     const [orderData, setOrderData] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -29,6 +31,7 @@ function OrderPage() {
         updatedOrderData.splice(index, 1);
         setOrderData(updatedOrderData);
         SetDataToLocalStorage(updatedOrderData);
+        setDeleteCount(deleteCount + 1)
     };
 
     if (loading) {
@@ -68,6 +71,7 @@ function OrderPage() {
                                 <th>Product Image</th>
                                 <th>Product Title</th>
                                 <th>Product Price</th>
+                                <th>Product Quantity</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -79,7 +83,8 @@ function OrderPage() {
                                         <img src={data.img} width={60} alt={data.title} />
                                     </td>
                                     <td>{data.title}</td>
-                                    <td>{data.price}</td>
+                                    <td>{data.price.toFixed(2)}</td>
+                                    <td>{data.quantity}</td>
                                     <td>
                                         <button className="btn btn-danger" onClick={() => handleDelete(index)}>Delete</button>
                                     </td>

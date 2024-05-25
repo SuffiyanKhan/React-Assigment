@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { TotalPrice } from "../../Services/totalPrice";
+import { useGlobalState } from "../../Context/Context";
 
 function TotalPriceComponent() {
+    const { deleteCount } = useGlobalState()
     const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
@@ -15,7 +17,7 @@ function TotalPriceComponent() {
         };
 
         fetchTotalPrice();
-    }, []);
+    }, [deleteCount]);
 
     return (
         <>
