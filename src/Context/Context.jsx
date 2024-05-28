@@ -7,12 +7,15 @@ const useGlobalState = () => useContext(GlobalContext)
 
 
 let GlobalStates = (children) => {
+    const [orderData, setOrderData] = useState([])
     const [productCounting, setProductCounting] = useState("");
     const [deleteCount, setDeleteCount] = useState(0)
 
     return <GlobalContext.Provider value={{
         productCounting,
         deleteCount,
+        orderData,
+        setOrderData,
         setDeleteCount,
         setProductCounting
     }}>

@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { GetDataFromLocalStorage } from "../Services/getDataFromLocalStorage";
-import DataNotFound from "../Components/DataNotFound/DataNotFound";
 import BackButton from "../Components/BackButton/BackButton";
 import TotalPrice from "../Components/TotalPrice/TotalPrice";
-import { SetDataToLocalStorage } from "../Services/SetDataToLocalStorage";
 import { useGlobalState } from "../Context/Context";
+import DataNotFoundComp from "../Components/DataNotFoundComp/DataNotFoundComp";
+import OrderTable from "../Components/OrderTable/OrderTable";
+import Loader from "../Components/Loader/Loader";
+import { BackButtonf } from "../Services/backbutton";
 
 function OrderPage() {
-    const { deleteCount, setDeleteCount } = useGlobalState()
-    const [orderData, setOrderData] = useState([]);
+    const { orderData, setOrderData } = useGlobalState()
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -25,32 +26,12 @@ function OrderPage() {
 
         fetchData();
     }, []);
-
-    const handleDelete = (index) => {
-        const updatedOrderData = [...orderData];
-        updatedOrderData.splice(index, 1);
-        setOrderData(updatedOrderData);
-        SetDataToLocalStorage(updatedOrderData);
-        setDeleteCount(deleteCount + 1)
-    };
-
     if (loading) {
-        return <p>Loading...</p>;
+        return <Loader />
     }
 
     if (!orderData || orderData.length === 0) {
-        return (
-            <>
-                <div className="container " style={{ height: "80vh" }}>
-                    <div className="mt-5 ms-5">
-                        <BackButton />
-                    </div>
-                    <div className="d-flex justify-content-center align-items-center  h-25">
-                    </div>
-                    <DataNotFound />
-                </div>
-            </>
-        );
+        return <DataNotFoundComp />;
     }
 
     return (
@@ -64,38 +45,15 @@ function OrderPage() {
                     <TotalPrice />
                 </div>
                 <div className="mt-5">
-                    <table className="table table-border">
-                        <thead>
-                            <tr>
-                                <th>S.No</th>
-                                <th>Product Image</th>
-                                <th>Product Title</th>
-                                <th>Product Price</th>
-                                <th>Product Quantity</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {orderData.map((data, index) => (
-                                <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td>
-                                        <img src={data.img} width={60} alt={data.title} />
-                                    </td>
-                                    <td>{data.title}</td>
-                                    <td>{data.price.toFixed(2)}</td>
-                                    <td>{data.quantity}</td>
-                                    <td>
-                                        <button className="btn btn-danger" onClick={() => handleDelete(index)}>Delete</button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    <OrderTable />
+                </div>
+                <div className="d-flex justify-content-between">
+                    <button className="btn bg-color fw-semibold text-light" onClick={() => { BackButtonf() }}>More Shopping</button>
+                    <button className="btn bg-color fw-semibold text-light">Order Place</button>
                 </div>
             </div>
         </div>
     );
 }
 
-export default OrderPage;
+export default memo(OrderPage);

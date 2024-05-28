@@ -88,11 +88,14 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import BackButton from "../Components/BackButton/BackButton";
 import Loader from "../Components/Loader/Loader";
+import { useGlobalState } from "../Context/Context";
+import { AddToCard } from "../Services/addToCard";
 
 function DetailPage() {
     const { id } = useParams(); // Corrected destructuring
     const [data, setData] = useState(null);
     const [imagesLoaded, setImagesLoaded] = useState(false); // State to handle image loading
+    const { productCounting, setProductCounting } = useGlobalState()
 
     useEffect(() => {
         (async () => {
@@ -122,7 +125,10 @@ function DetailPage() {
     if (!data) {
         return <Loader />;
     }
-
+    const save = (img, title, price) => {
+        AddToCard(img, title, price)
+        setProductCounting(productCounting + 1)
+    }
     return (
         <div className="container mt-5">
             <BackButton />
@@ -173,7 +179,7 @@ function DetailPage() {
                     <p>Price: ${data.price}</p>
                     <p>Stock: {data.stock}</p>
                     <div className="w-100 mt-5">
-                        <button className="btn btn-success w-100">BUY</button>
+                        <button className="btn bg-color fw-semibold text-light w-100" onClick={() => { save(data.thumbnail, data.title, data.price) }} >Add to Card</button>
                     </div>
                 </div>
             </div>

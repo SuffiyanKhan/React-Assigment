@@ -1,3 +1,8 @@
 .bg-color{
     background-color: #0cac0c;
 }
+.bg-color:hover{
+    background-color: white !important;
+    color: #0cac0c !important;
+    border: 0.0975rem solid #0cac0c !important;
+}

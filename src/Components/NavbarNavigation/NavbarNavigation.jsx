@@ -1,3 +1,5 @@
+// import MegaPage from '../MegaPage/MegaPage'
+import { Link } from 'react-router-dom'
 import './NavbarNavigation.css'
 
 
@@ -34,18 +36,18 @@ function NavbarNavigation() {
                         </a>
                     </li>
                     <li className="nav-item">
+                        <Link className="nav-link fw-semibold text-dark" to={'/o'}>
+                            Shop Cart
+                        </Link>
+                    </li>
+                    <li className="nav-item">
                         <a className="nav-link fw-semibold text-dark" href="#">
-                            Shop
+                            Stores
                         </a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link fw-semibold text-dark" href="#">
-                            Store
-                        </a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link fw-semibold text-dark" href="#">
-                            Mega Page
+                            Mega menu
                         </a>
                     </li>
                     <li className="nav-item">
